@@ -1,5 +1,11 @@
+<% if @port -%>
 PORT="<%= @port %>"
+<% end -%>
 USER="<%= @user %>"
+<% if @max_connections -%>
 MAXCONN="<%= @max_connections %>"
+<% end -%>
+<% if @cache_size -%>
 CACHESIZE="<%= @cache_size %>"
-OPTIONS=""
+<% end -%>
+OPTIONS="<%= @options %>"

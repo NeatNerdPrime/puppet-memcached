@@ -19,7 +19,14 @@ describe 'memcached::python' do
       end
 
       it { should contain_class('memcached::python') }
-      it { should contain_package('python-memcached') }
+      case facts[:osfamily]
+      when 'RedHat'
+        it { should contain_package('python-memcached') }
+      when 'Debian'
+        it { should contain_package('python-memcache') }
+      when 'OpenBSD'
+        it { should contain_package('py-memcached') }
+      end
     end
   end
 end

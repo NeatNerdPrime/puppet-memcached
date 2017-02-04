@@ -18,16 +18,21 @@ describe 'memcached' do
         facts
       end
 
-      it { should contain_anchor('memcached::begin') }
-      it { should contain_anchor('memcached::end') }
       it { should contain_class('memcached') }
       it { should contain_class('memcached::config') }
       it { should contain_class('memcached::install') }
       it { should contain_class('memcached::params') }
       it { should contain_class('memcached::service') }
-      it { should contain_file('/etc/sysconfig/memcached') }
       it { should contain_package('memcached') }
       it { should contain_service('memcached') }
+
+      case facts[:osfamily]
+      when 'RedHat'
+        it { should contain_file('/etc/sysconfig/memcached') }
+      when 'Debian'
+        it { should contain_file('/etc/default/memcached') }
+        it { should contain_file('/etc/memcached.conf') }
+      end
     end
   end
 end

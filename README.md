@@ -9,84 +9,29 @@ Tested with Travis CI
 
 #### Table of Contents
 
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with memcached](#setup)
-    * [What memcached affects](#what-memcached-affects)
+1. [Description](#description)
+2. [Setup - The basics of getting started with memcached](#setup)
     * [Beginning with memcached](#beginning-with-memcached)
-4. [Usage - Configuration options and additional functionality](#usage)
-    * [Classes and Defined Types](#classes-and-defined-types)
-        * [Class: memcached](#class-memcached)
-        * [Class: memcached::python](#class-memcachedpython)
-    * [Examples](#examples)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+3. [Usage - Configuration options and additional functionality](#usage)
+4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
-## Overview
+## Description
 
 This module manages Memcached.
 
-## Module Description
-
-This module can install and configure the Memcached package and service.
-
 ## Setup
 
-### What memcached affects
-
-* The package providing the Memcached software.
-* The flags controlling operation of the software.
-* The service controlling the `memcached` daemon.
-* Python client bindings.
-
 ### Beginning with memcached
+
+In the very simplest case, you can just include the following:
 
 ```puppet
 include ::memcached
 ```
 
 ## Usage
-
-### Classes and Defined Types
-
-#### Class: `memcached`
-
-**Parameters within `memcached`:**
-
-##### `cache_size`
-
-The size of the cache used, expressed in megabytes.
-
-##### `max_connections`
-
-The maximum number of concurrent TCP connections allowed.
-
-##### `package_name`
-
-The name of the package to install that provides the Memcached software.
-
-##### `port`
-
-The TCP port to bind to.
-
-##### `service_name`
-
-The name of the service managing the Memcached daemon.
-
-##### `user`
-
-The user to run as.
-
-#### Class: `memcached::python`
-
-**Parameters within `memcached::python`:**
-
-##### `package_name`
-
-The package to install that provides the Python client bindings.
-
-### Examples
 
 Install Memcached and configure to use 128 MB:
 
@@ -104,32 +49,32 @@ include ::memcached::python
 
 ## Reference
 
-### Classes
-
-#### Public Classes
-
-* [`memcached`](#class-memcached): Main class for managing Memcached.
-* [`memcached::python`](#class-memcachedpython): Class for managing Python
-  client bindings.
-
-#### Private Classes
-
-* `memcached::install`: Handles Memcached installation.
-* `memcached::config`: Handles Memcached configuration.
-* `memcached::params`: Different configuration data for different systems.
-* `memcached::service`: Manages the `memcached` service.
+The reference documentation is generated with
+[puppet-strings](https://github.com/puppetlabs/puppet-strings) and the latest
+version of the documentation is hosted at
+[https://bodgit.github.io/puppet-memcached/](https://bodgit.github.io/puppet-memcached/).
 
 ## Limitations
 
-This module has been built on and tested against Puppet 3.0 and higher.
+This module has been built on and tested against Puppet 4.4.0 and higher.
 
 The module has been tested on:
 
-* RedHat/CentOS Enterprise Linux 6/7
-
-Testing on other platforms has been light and cannot be guaranteed.
+* RedHat Enterprise Linux 6/7
+* Ubuntu 14.04/16.04
+* Debian 7/8
+* OpenBSD 6.0
 
 ## Development
+
+The module has both [rspec-puppet](http://rspec-puppet.com) and
+[beaker-rspec](https://github.com/puppetlabs/beaker-rspec) tests. Run them
+with:
+
+```
+$ bundle exec rake test
+$ PUPPET_INSTALL_TYPE=agent PUPPET_INSTALL_VERSION=x.y.z bundle exec rake beaker:<nodeset>
+```
 
 Please log issues or pull requests at
 [github](https://github.com/bodgit/puppet-memcached).

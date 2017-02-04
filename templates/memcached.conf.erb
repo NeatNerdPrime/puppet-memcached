@@ -1,0 +1,19 @@
+# !!! Managed by Puppet !!!
+-d
+logfile /var/log/memcached.log
+<% if @cache_size -%>
+-m <%= @cache_size %>
+<% end -%>
+<% if @port -%>
+-p <%= @port %>
+<% end -%>
+-u <%= @user %>
+<% if @max_connections -%>
+-c <%= @max_connections %>
+<% end -%>
+<% if @interface -%>
+-l <%= @interface -%>
+<% end -%>
+<% if @sasl -%>
+-S
+<% end -%>

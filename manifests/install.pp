@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class memcached::install {
 
   package { $::memcached::package_name:
